@@ -1,0 +1,27 @@
+{
+  "name": "Agent Key Pass #143",
+  "description": "Agent Key Pass (AKEY) — 444 transferable Passes on BNB Smart Chain. 77 free for Binance Agent ID holders (1 per wallet, gas only), then 367 paid at 0.00142 BNB (~$1.00) each, open to all wallets. A Pass unlocks holder-only companion mint access, raffle entries and advisory votes. Points are a score, not a token, and do not entitle anyone to tokens or payouts. The contract is not audited by a third party. No floor price, returns, APY, dated token or airdrop, game, or merch is promised.",
+  "image": "ipfs://bafybeifl4gr6ym3p6saqu7jtahndddyy5mfcduwsvssu3z33crmadczzcm",
+  "attributes": [
+    {
+      "trait_type": "Collection",
+      "value": "Agent Key Pass"
+    },
+    {
+      "trait_type": "Type",
+      "value": "Pass"
+    },
+    {
+      "trait_type": "Transferable",
+      "value": "Yes"
+    },
+    {
+      "trait_type": "Origin",
+      "value": "Paid"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 143
+    }
+  ]
+}
