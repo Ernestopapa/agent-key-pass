@@ -1,0 +1,30 @@
+{
+  "submitStatus": 202,
+  "submitBody": {
+    "verificationId": "0bf39af9-01ab-40ae-be4d-f9d8dedcfeff"
+  },
+  "lastPoll": {
+    "isJobCompleted": true,
+    "verificationId": "0bf39af9-01ab-40ae-be4d-f9d8dedcfeff",
+    "jobStartTime": "2026-11-02T15:32:10Z",
+    "jobFinishTime": "2026-11-02T15:32:11Z",
+    "compilationTime": "642",
+    "externalVerifications": {
+      "etherscan": {
+        "verificationId": "rq6difn8xfwhycirtuj1w3be84hwbbpusgripw6ecg39fkcakj",
+        "statusUrl": "https://api.etherscan.io/v2/api?chainid=97&module=contract&action=checkverifystatus&guid=rq6difn8xfwhycirtuj1w3be84hwbbpusgripw6ecg39fkcakj",
+        "explorerUrl": "https://testnet.bscscan.com//address/0x9E52aa8073F37C075822F4fEd6F33B8a7954D028",
+        "contractApiUrl": "https://api.etherscan.io/v2/api?chainid=97&module=contract&action=getabi&address=0x9E52aa8073F37C075822F4fEd6F33B8a7954D028"
+      }
+    },
+    "contract": {
+      "match": "exact_match",
+      "creationMatch": "exact_match",
+      "runtimeMatch": "exact_match",
+      "chainId": "97",
+      "address": "0x9E52aa8073F37C075822F4fEd6F33B8a7954D028",
+      "verifiedAt": "2026-11-02T15:32:11Z",
+      "matchId": "58094532"
+    }
+  }
+}

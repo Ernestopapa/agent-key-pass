@@ -1,0 +1,117 @@
+{
+  "network": "BSC testnet",
+  "chainId": 97,
+  "at": "2026-11-02T15:31:17.769Z",
+  "tests": [
+    {
+      "name": "name/symbol",
+      "ok": true,
+      "detail": "Agent Key Pass / AKEY"
+    },
+    {
+      "name": "constants + owner is user wallet",
+      "ok": true,
+      "detail": "owner 0x75d251Ba39dED2E456d9f6DD776f77d422864403"
+    },
+    {
+      "name": "totalSupply 0 / freeOpen true / paidOpen false at start",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "freeMint (agent wallet)",
+      "ok": true,
+      "detail": "tx 0xf17b1d6f9e4333b231682380252e9accab9b77203f6130812105a55585a7750f gas 127754 token #1"
+    },
+    {
+      "name": "double freeMint reverts",
+      "ok": true,
+      "detail": "execution reverted: \"already claimed free\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000"
+    },
+    {
+      "name": "freeMint (non-agent) reverts",
+      "ok": true,
+      "detail": "execution reverted: \"no Agent ID\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000000000000"
+    },
+    {
+      "name": "paid mint blocked during free phase",
+      "ok": true,
+      "detail": "execution reverted: \"paid mint not open yet\" (action=\"estimateGas\", data=\"0x08c379a00000000000000000"
+    },
+    {
+      "name": "free supply exhausted (77/77)",
+      "ok": true,
+      "detail": "freeMintedCount=77 last tx 0x09a89b57c7d7351bc34f297e5c744716dea316fa6c9c79748167f342e3af503d"
+    },
+    {
+      "name": "freeRemaining 0 / paidOpen true",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "paid mint x1 (NON-AGENT) succeeds after free exhaustion",
+      "ok": true,
+      "detail": "tx 0x8da78050fe90f858215bfbf00d459017109d3d6243e534587d4f8c6b0a191f9f gas 102531 token #78"
+    },
+    {
+      "name": "paid mint x3 (agent) succeeds",
+      "ok": true,
+      "detail": "tx 0x64bef3dbad35c819e8c9c4026ab45cb2c29a603a55fd23467ff4bc60edd96b6f gas 122431 tokens #79-81"
+    },
+    {
+      "name": "paid mint qty 4 reverts",
+      "ok": false,
+      "detail": "insufficient funds (transaction={ \"data\": \"0xa0712d6800000000000000000000000000000000000000000000000"
+    },
+    {
+      "name": "paid mint wrong price reverts",
+      "ok": true,
+      "detail": "execution reverted: \"wrong price\" (action=\"estimateGas\", data=\"0x08c379a0000000000000000000000000000"
+    },
+    {
+      "name": "royaltyInfo 5% to owner (user wallet)",
+      "ok": true,
+      "detail": "receiver 0x75d251Ba39dED2E456d9f6DD776f77d422864403 amount 0.05 tBNB on 1 tBNB sale"
+    },
+    {
+      "name": "contract holds paid tBNB 0.00568 for owner",
+      "ok": true,
+      "detail": "0.00568 tBNB"
+    },
+    {
+      "name": "non-owner (deployer) withdraw reverts",
+      "ok": false,
+      "detail": "execution reverted (unknown custom error) (action=\"estimateGas\", data=\"0x118cdaa70000000000000000000000004f034a86ef3b1da"
+    }
+  ],
+  "corrections": [
+    {
+      "name": "paid mint qty 4 reverts (CORRECTED)",
+      "original": "FAIL \u2014 insufficient funds (plain wallet held ~0.00457 tBNB after its x1 paid mint, but the script's qty-4 call sent value 0.00568 tBNB, so ethers failed at estimateGas before the contract's qty check could run; the qty cap was NOT proven by that attempt)",
+      "proof": "eth_call mint(4) with value 0 from plain wallet 0x0e995Bf9B142C42A5c602Ed0b1b76580a53F3A07 reverted with exactly \"qty 1..3\" \u2014 mint() checks qty FIRST (before price), so value 0 reaches the qty check. Proves the max-3 cap live on testnet.",
+      "ok": true
+    },
+    {
+      "name": "non-owner (deployer) withdraw reverts (CORRECTED)",
+      "original": "FAIL \u2014 script regex /OwnableUnauthorizedAccount/ did not match ethers' rendering \"execution reverted (unknown custom error)\"",
+      "proof": "Revert data was 0x118cdaa7 + deployer address 0x4f034A86EF3B1DAE84Ccba9764564304d2821B98. keccak('OwnableUnauthorizedAccount(address)')[:4] = 0x118cdaa7 (verified in node). Re-ran deployer withdraw via staticCall: reverted with exactly 0x118cdaa70000000000000000000000004f034a86ef3b1dae84ccba9764564304d2821b98 \u2014 OwnableUnauthorizedAccount(deployer). Proves withdraw is owner-only live on testnet.",
+      "ok": true
+    }
+  ],
+  "summary": "16 scripted live tests: 14 passed, 2 initially FAILed for harness reasons only. Both corrected with raw-RPC proofs above: final live result 16/16 proven on BSC testnet. Contract holds 0.00568 tBNB for the owner (user wallet).",
+  "verification": {
+    "sourcify": {
+      "status": "exact_match",
+      "matchId": 58094532,
+      "verifiedAt": "2026-11-02T15:32:11Z",
+      "url": "https://sourcify.dev/server/v2/contract/97/0x9E52aa8073F37C075822F4fEd6F33B8a7954D028"
+    },
+    "bscscan_testnet": {
+      "status": "verified",
+      "method": "Sourcify forwarding (no separate API submit needed)",
+      "checkedVia": "getsourcecode chain 97 returned ContractName AgentKeyPass, v0.8.26+commit.8a97fa7a, optimization 1, runs 200, EVM cancun, SourceCode 176971 chars",
+      "url": "https://testnet.bscscan.com/address/0x9E52aa8073F37C075822F4fEd6F33B8a7954D028#code"
+    }
+  },
+  "deployerBalanceAfterTBNB": "0.0007412054"
+}
